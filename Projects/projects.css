@@ -1,0 +1,96 @@
+/* 项目卡片容器 */
+.projects-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* 默认单列 */
+    gap: 2rem; /* 卡片之间的间距 */
+}
+
+/* 响应式：中等屏幕两列 */
+@media (min-width: 768px) {
+    .projects-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 两列自适应 */
+    }
+}
+
+/* 项目卡片样式 */
+.project-card {
+    background-color: rgba(255, 255, 255, 0.08); /* 略深的半透明背景 */
+    padding: 1.5rem;
+    border-radius: 1rem; /* 圆角 */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* 柔和的阴影 */
+    transition: all 0.3s ease-in-out;
+    color: #e0e0e0; /* 默认文字颜色 */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* 内容上下对齐 */
+}
+
+.project-card:hover {
+    transform: translateY(-5px) scale(1.02); /* 悬停浮动效果 */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5); /* 更明显的阴影 */
+    background-color: rgba(255, 255, 255, 0.12); /* 悬停时背景略微变亮 */
+}
+
+.project-card h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.75rem;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.project-card .project-thumbnail {
+    width: 100%;
+    height: 180px; /* 固定高度，确保图片大小一致 */
+    object-fit: cover; /* 裁剪图片以填充 */
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.project-card .project-tagline {
+    font-size: 1rem;
+    color: #a78bfa; /* 浅紫色 */
+    margin-bottom: 1rem;
+}
+
+.project-card .project-meta {
+    font-size: 0.9rem;
+    color: #c4b5fd; /* 更亮的浅紫色 */
+    margin-bottom: 1rem;
+}
+
+.project-card .project-meta span {
+    display: block; /* 每个元信息一行 */
+    margin-bottom: 0.25rem;
+}
+
+.project-card .project-description {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    flex-grow: 1; /* 允许描述占据更多空间 */
+}
+
+.project-card .project-links {
+    display: flex;
+    gap: 1rem; /* 链接之间的间距 */
+    margin-top: auto; /* 将链接推到底部 */
+}
+
+.project-card .project-link {
+    background-color: #553c9a; /* 按钮深紫色 */
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.project-card .project-link:hover {
+    background-color: #6b46c1; /* 悬停时变亮 */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
