@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>随笔</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="../logo.png">
+    <style>
+        /* 自定义字体 */
+        body {
+            font-family: 'Inter', sans-serif;
+            /* 宇宙星空背景主题 - 请替换为您的本地图片路径 */
+            background-image: url('../head.jpg'); /* 示例：请将此替换为您的本地背景图片路径 */
+            background-size: cover; /* 覆盖整个视口 */
+            background-position: center center; /* 图片居中 */
+            background-attachment: fixed; /* 背景固定，不随滚动条移动 */
+            background-color: #0d0d1a; /* 深色背景作为备用或填充 */
+            display: flex;
+            justify-content: center; /* 保持整体内容居中 */
+            align-items: center;
+            min-height: 100vh; /* 确保内容至少占据整个视口高度 */
+            margin: 0;
+            /* 允许页面内容滚动，不再隐藏溢出 */
+            overflow-y: auto; /* 允许垂直滚动 */
+            overflow-x: hidden; /* 隐藏水平滚动 */
+            position: relative; /* 设置body为定位上下文，以便其子元素可以绝对定位 */
+        }
+
+        /* 按钮的通用样式 */
+        .menu-button {
+            /* 更深沉的紫色背景 */
+            background-color: #6b46c1; /* Tailwind purple-700 */
+            /* 白色文字 */
+            color: #ffffff;
+            /* 字体大小和粗细 */
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* font-semibold */
+            /* 内边距 */
+            padding: 0.75rem 2rem; /* py-3 px-8 */
+            /* 圆角 */
+            border-radius: 0.75rem; /* rounded-xl */
+            /* 更精致的多层阴影，模拟凸起和深度 */
+            box-shadow:
+                0 6px 12px rgba(0, 0, 0, 0.4), /* 主阴影，更深以适应暗背景 */
+                0 2px 4px rgba(0, 0, 0, 0.2),  /* 较小阴影，增加清晰度 */
+                inset 0 1px 0 rgba(255, 255, 255, 0.15), /* 顶部细微高光 */
+                inset 0 -1px 0 rgba(0, 0, 0, 0.2); /* 底部细微阴影 */
+            /* 更平滑的过渡效果 */
+            transition: all 0.3s ease-in-out;
+            /* 文本居中 */
+            text-align: center;
+            /* 阻止文本选择 */
+            user-select: none;
+            /* 鼠标指针 */
+            cursor: pointer;
+            /* 移除下划线（如果用a标签） */
+            text-decoration: none;
+            /* 确保按钮是块级元素以便垂直堆叠 */
+            display: block;
+            /* 按钮之间的间距 */
+            margin-bottom: 1.25rem; /* mb-5，略微增加间距 */
+            /* 按钮宽度 */
+            width: 100%; /* 默认宽度 */
+            max-width: 220px; /* 略微增加最大宽度 */
+            /* 细微的文本阴影，增加文字的深度感 */
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); /* 文本阴影略深 */
+        }
+
+        /* 鼠标悬停效果 */
+        .menu-button:hover {
+            background-color: #805ad5; /* 悬停时颜色变浅 */
+            /* 更明显的阴影，模拟“浮起”效果 */
+            box-shadow:
+                0 10px 20px rgba(0, 0, 0, 0.5), /* 更大的主阴影 */
+                0 4px 8px rgba(0, 0, 0, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.25);
+            transform: translateY(-3px); /* 向上移动更多，增加交互感 */
+            filter: brightness(1.1); /* 稍微提亮 */
+        }
+
+        /* 鼠标点击效果 */
+        .menu-button:active {
+            background-color: #553c9a; /* 点击时颜色变深 */
+            /* 模拟“按下”的内凹阴影效果 */
+            box-shadow:
+                0 2px 4px rgba(0, 0, 0, 0.2), /* 较小的外部阴影 */
+                0 1px 2px rgba(0, 0, 0, 0.1),
+                inset 0 2px 4px rgba(0, 0, 0, 0.3); /* 内部阴影，模拟凹陷 */
+            transform: translateY(0); /* 回到原位 */
+            filter: brightness(0.9); /* 稍微变暗 */
+        }
+
+        /* 绝对定位的按钮容器 */
+        .absolute-button-container {
+            position: absolute;
+            top: 50%; /* 垂直居中 */
+            left: 10%; /* 距离左侧10% */
+            transform: translateY(-50%); /* 向上偏移自身高度的一半，实现精确垂直居中 */
+            z-index: 10; /* 确保在其他元素之上 */
+        }
+
+        /* 绝对定位的内容容器 */
+        .absolute-content-container {
+            position: absolute;
+            top: 5%; /* 距离顶部5% */
+            left: 30%; /* 距离左侧40%，留出左侧按钮空间 */
+            /* 移除 transform: translateY(-50%); 因为现在有固定的top和max-height */
+            z-index: 10;
+            background-color: rgba(255, 255, 255, 0.05); /* 半透明白色背景 */
+            padding: 2rem;
+            border-radius: 1rem; /* 圆角 */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* 柔和阴影 */
+            max-width: 600px; /* 限制内容区最大宽度 */
+            width: 100%; /* 宽度自适应 */
+            color: #e0e0e0; /* 文本颜色 */
+            line-height: 1.8; /* 行高 */
+            max-height: 90vh; /* 设置最大高度，当内容超出时出现滚动条 */
+            overflow-y: auto; /* 允许垂直滚动 */
+            -webkit-overflow-scrolling: touch; /* 针对iOS设备的平滑滚动 */
+        }
+
+        /* 自定义滚动条样式 (可选，但能提升质感) */
+        .absolute-content-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .absolute-content-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05); /* 滚动条轨道颜色 */
+            border-radius: 10px;
+        }
+
+        .absolute-content-container::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2); /* 滚动条滑块颜色 */
+            border-radius: 10px;
+        }
+
+        .absolute-content-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3); /* 滚动条滑块悬停颜色 */
+        }
+
+
+        .absolute-content-container h2 {
+            font-size: 1.5rem; /* 标题大小 */
+            font-weight: 700; /* 标题粗细 */
+            color: #ffffff; /* 标题颜色 */
+            margin-bottom: 1rem;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+        }
+
+        .absolute-content-container p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .absolute-content-container ul {
+            list-style: none; /* 移除默认列表点 */
+            padding: 0;
+        }
+
+        .absolute-content-container ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .absolute-content-container ul li a {
+            color: #a78bfa; /* 浅紫色链接颜色 */
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.2s ease-in-out;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .absolute-content-container ul li a:hover {
+            color: #c4b5fd; /* 悬停时链接颜色变亮 */
+            text-decoration: underline;
+        }
+
+
+        /* 响应式调整 */
+        @media (max-width: 1024px) { /* 针对平板和小型桌面 */
+            .absolute-button-container {
+                left: 5%; /* 调整左侧按钮位置 */
+            }
+            .absolute-content-container {
+                left: 35%; /* 调整内容区位置 */
+                padding: 1.5rem;
+                max-height: 80vh; /* 调整平板上的最大高度 */
+            }
+        }
+
+        @media (max-width: 768px) { /* 针对手机 */
+            .absolute-button-container,
+            .absolute-content-container {
+                position: static; /* 在小屏幕上取消绝对定位 */
+                transform: none; /* 移除转换 */
+                width: auto; /* 宽度自适应 */
+                margin: 2rem auto; /* 居中并增加间距 */
+                text-align: center; /* 按钮文字居中 */
+            }
+
+            .absolute-button-container {
+                margin-bottom: 3rem; /* 按钮和内容区之间增加间距 */
+            }
+
+            .absolute-content-container {
+                text-align: left; /* 内容区文本左对齐 */
+                max-width: 90%; /* 限制内容区宽度 */
+                max-height: none; /* 在手机上取消最大高度限制，让内容自然展开 */
+                overflow-y: visible; /* 允许内容自然溢出，由body滚动 */
+            }
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <div class="absolute-button-container flex flex-col items-center w-full md:w-auto">
+        <a href="../index.html" class="menu-button">首页</a>
+        <a href="./essays.html" class="menu-button">随笔</a>
+        <a href="../Websites/websites.html" class="menu-button">网站</a>
+        <a href="../Excerpts/excerpts.html" class="menu-button">摘抄</a>
+        <a href="../Projects/projects.html" class="menu-button">项目</a>
+        <a href="../Contact/contact.html" class="menu-button mb-0">联系</a>
+    </div>
+
+    <div class="absolute-content-container">
+        <h2>随笔</h2>
+        <p>一些随笔。</p>
+        <ul>
+            <li><a href="./Veo3.html">Veo3🔥🔥🔥</a></li>
+            <li><a href="./stable_diffusion.html">Stable Diffusion</a></li>
+            <li><a href="./markdown.html">MarkDown语法</a></li>
+
+        </ul>
+    </div>
+</body>
+</html>
