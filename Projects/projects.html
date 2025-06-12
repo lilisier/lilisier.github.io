@@ -255,7 +255,33 @@
 
         <div class="project-card">
             <img src="./pro2.png" alt="项目 2 缩略图" class="project-thumbnail">
-            <h3>项目二：热轧带钢金属表面缺陷检测</h3>
+            <h3>项目二：AI驱动的心理健康支持与医疗信息引导Agent</h3>
+            <p class="project-tagline">
+                本项目开发并部署了一款智能AI Agent，旨在提供个性化情绪管理和轻度心理健康支持，
+                该Agent通过CoT逻辑实现情绪识别与定制化建议，并结合RAG技术，在识别用户潜在医疗需求时，
+                能从权威知识库中检索引导用户获取相关医疗科普信息，提升服务可及性与安全性。
+            </p>
+            <div class="project-meta">
+                <span class="tech-stack">技术栈:</span>
+                <span class="role">开发工具：Anaconda、PyCharm</span>
+                <span class="role">核心框架：LangChain（RAG,CoT）</span>
+                <span class="role">向量数据库：ChromaDB(本地持久化)</span>
+                <span class="role">数据存储：文本文件(.txt)知识库</span>
+            </div>
+            <p class="project-description">
+                <li><a>成功构建具备CoT推理和RAG检索能力的AI Agent。</a></li>
+                <li><a>实现个性化情绪支持与精准医疗信息引导，提升服务可及性。</a></li>
+                <li><a>确保医疗信息来源可靠、避免幻觉，保障用户安全。</a></li>
+                <li><a>优化数据加载与管理，提高系统运行效率。</a></li>
+            </p>
+            <div class="project-links">
+                <a href="https://github.com/lilisier/AI-driven-mental-health-support-and-medical-information-guidance-agent" target="_blank" class="project-link">GitHub 仓库</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <img src="./pro3.png" alt="项目 3 缩略图" class="project-thumbnail">
+            <h3>项目三：热轧带钢金属表面缺陷检测</h3>
             <p class="project-tagline">
                 本项目旨在构建一个基于卷积神经网络（CNN）的图像分类模型，用于自动检测和分类热轧带钢表面的常见缺陷。
                 项目涵盖了图像预处理、模型训练、评估及部署等完整流程，助力实现制造流程中的智能质检。
@@ -268,8 +294,8 @@
                 <span class="role">数据可视化：Matplotlib</span>
             </div>
             <p class="project-description">
-                <li>使用包含六类缺陷图像的数据集，并通过 ImageDataGenerator 对图像进行归一化与增强处理，提升模型的泛化能力。</li>
-                <li>构建了一个轻量级 CNN 网络结构，包括三层卷积层、两层最大池化层和两层全连接层，输出层采用 softmax 激活进行六分类。。</li>
+                <li>使用包含六类缺陷图像的数据集，图像进行归一化与增强处理，提升模型的泛化能力。</li>
+                <li>构建了一个轻量级 CNN 网络结构，包括三层卷积层、两层最大池化层和两层全连接层，输出层采用 softmax 激活进行六分类。</li>
                 <li>启用了 TFLite 的默认优化策略，成功将模型.h5转换为.tflite格式，模型文件大小从700kB缩小到70kB，推理速度增加20%。</li>
                 <li>成功训练并部署了热轧带钢表面缺陷识别模型，具备高准确率、低延迟、低资源占用的特点，能够在边缘设备上高效运行。</li>
             </p>
